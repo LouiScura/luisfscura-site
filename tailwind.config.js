@@ -13,9 +13,17 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Albert', ...defaultTheme.fontFamily.sans],
             },
         },
+        colors: {
+            'primary': '#28293B',
+            'custom-orange': '#E56823',
+            'custom-black': '#0C0C0C',
+            'body-bg': '#0F1419',
+            'custom-grey': '#F5F5F5',
+            'custom-border': '#3E4144'
+        }
     },
 
     plugins: [forms],
