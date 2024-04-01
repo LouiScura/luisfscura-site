@@ -4,19 +4,26 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PostController;
+use App\Models\Tag;
 
 Route::get('/', function () {
+
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'tags'  => Tag::all()->map->only(
+            'id',
+            'name'
+        )
     ]);
 });
 
-Route::get('/blog', function() {
-    return Inertia::render('Blog');
-});
+Route::get('/blog', [PostController::class, 'index']);
+
+Route::get('/blog/{post:slug}', [PostController::class, 'show']);
 
 Route::get('/now', function() {
     return Inertia::render('Now');

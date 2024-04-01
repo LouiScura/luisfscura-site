@@ -15,14 +15,17 @@ export default {
             fontFamily: {
                 sans: ['Albert', ...defaultTheme.fontFamily.sans],
             },
-        },
-        colors: {
-            'primary': '#28293B',
-            'custom-orange': '#E56823',
-            'custom-black': '#0C0C0C',
-            'body-bg': '#0F1419',
-            'custom-grey': '#F5F5F5',
-            'custom-border': '#3E4144'
+            colors: {
+                'primary': '#28293B',
+                'custom-orange': '#E56823',
+                'custom-black': '#0C0C0C',
+                'body-bg': '#0F1419',
+                'custom-grey': '#F5F5F5',
+                'custom-border': '#3E4144'
+            },
+            fontSize: {
+                'md': '0.9rem'
+            }
         }
     },
 

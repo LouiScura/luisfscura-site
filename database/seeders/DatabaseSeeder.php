@@ -30,6 +30,6 @@ class DatabaseSeeder extends Seeder
 
         Category::factory(6)->create();
 
-        Tag::factory(6)->create();
+        Tag::factory(3)->create();
     }
 }
