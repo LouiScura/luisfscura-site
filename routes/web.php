@@ -5,19 +5,21 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
-use App\Models\Tag;
+use App\Models\Project;
+use App\Models\Post;
 
 Route::get('/', function () {
-
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'tags'  => Tag::all()->map->only(
-            'id',
-            'name'
-        )
+        'posts'  => Post::all(),
+        'projects'  => Project::with(['tags' => fn($query) =>
+                $query->select('tag_id', 'name')
+            ])
+            ->select('id', 'title', 'image', 'link')
+            ->get()
     ]);
 });
 

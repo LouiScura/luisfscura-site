@@ -17,8 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
@@ -26,10 +24,13 @@ class DatabaseSeeder extends Seeder
 
         Post::factory(10)->create();
 
-        Project::factory(6)->create();
+        $tags = Tag::factory(3)->create();
+
+        Project::factory(4)->create()->each(function ($project) use ($tags) {
+            $randomTags = $tags->random(rand(1, 3));
+            $project->tags()->attach($randomTags);
+        });
 
         Category::factory(6)->create();
-
-        Tag::factory(3)->create();
     }
 }

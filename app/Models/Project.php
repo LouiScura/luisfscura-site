@@ -14,4 +14,9 @@ class Project extends Model
         'image',
         'link'
     ];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
