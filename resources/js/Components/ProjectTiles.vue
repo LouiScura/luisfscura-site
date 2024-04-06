@@ -6,11 +6,6 @@ const props = defineProps({
     projects: Object,
     tags: Object
 })
-
-onMounted( () => {
-   console.log(props.projects)
-});
-
 </script>
 
 <template>

@@ -16,7 +16,9 @@ class PostController extends Controller
             'name'
         );
 
-        $posts = Post::query()
+        $posts = Post::with(['categories' => fn($query) =>
+                $query->select('category_id', 'name')
+            ])
             ->select(['id', 'title', 'body', 'slug', 'excerpt', 'image'])
             ->simplePaginate(5);
 

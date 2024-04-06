@@ -11,9 +11,6 @@ const props = defineProps({
     projects: { type: Object},
     posts: {type: Object}
 });
-
-
-onMounted(() => console.log(props.posts));
 </script>
 
 <template>
