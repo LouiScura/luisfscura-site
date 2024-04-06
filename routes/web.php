@@ -14,13 +14,17 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'posts'  => Post::all(),
+        'posts' => Post::query()
+            ->select(['id', 'title', 'body', 'slug', 'excerpt', 'image', 'created_at'])
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get(),
         'projects'  => Project::with(['tags' => fn($query) =>
-                $query->select('tag_id', 'name')
-            ])
-            ->select('id', 'title', 'image', 'link')
-            ->get()
-    ]);
+                    $query->select('tag_id', 'name')
+                ])
+                ->select('id', 'title', 'image', 'link')
+                ->get()
+        ]);
 });
 
 Route::get('/blog', [PostController::class, 'index']);

@@ -13,7 +13,7 @@ const mobileMenu = ref(false);
             <div class="flex items-center justify-between text-xl px-6 md:px-0">
                 <div class="py-4">
                     <Link href="/">
-                        <h1 class="font-bold text-custom-grey lg:text-2xl">Luis Scura</h1>
+                        <h1 class="font-bold text-custom-grey text-title">Luis Scura</h1>
                     </Link>
                 </div>
 

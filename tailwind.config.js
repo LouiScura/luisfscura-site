@@ -24,7 +24,14 @@ export default {
                 'custom-border': '#3E4144'
             },
             fontSize: {
-                'md': '0.9rem'
+                'md': '0.9rem',
+                'title': '1.75rem',
+                'sub-title': '1.375rem'
+            },
+            width: {
+                '46': '46%',
+                '48': '48%',
+                '420': '420px'
             }
         }
     },

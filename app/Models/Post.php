@@ -15,4 +15,9 @@ class Post extends Model
         'excerpt',
         'image'
     ];
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

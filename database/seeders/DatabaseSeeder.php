@@ -22,7 +22,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Post::factory(10)->create();
+        $categories = Category::factory(3)->create();
+
+        Post::factory(6)->create()->each(function ($post) use ($categories){
+            $randomCategories = $categories->random(rand(1, 3));
+            $post->categories()->attach($randomCategories);
+        });
 
         $tags = Tag::factory(3)->create();
 
@@ -30,7 +35,5 @@ class DatabaseSeeder extends Seeder
             $randomTags = $tags->random(rand(1, 3));
             $project->tags()->attach($randomTags);
         });
-
-        Category::factory(6)->create();
     }
 }

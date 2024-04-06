@@ -13,9 +13,9 @@ defineProps({
         :href="sourceUrl"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center px-4 py-2 bg-custom-orange text-custom-grey rounded-md font-semibold text-xs md:m-0"
+        class="inline-flex items-center px-4 py-2 bg-custom-orange text-custom-grey rounded-md font-semibold md:m-0"
         :class="classes">
         <img v-if="iconUrl" :src="iconUrl" :alt="iconAlt" class="mr-3"/>
-        <span>{{ name }}</span>
+        <span class="text-base">{{ name }}</span>
     </a>
 </template>

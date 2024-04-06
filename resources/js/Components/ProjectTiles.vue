@@ -15,8 +15,8 @@ onMounted( () => {
 
 <template>
     <section class="max-w-5xl mx-auto w-full px-6 text-custom-grey">
-        <h2 class="font-semibold text-xl py-4">Featured Projects</h2>
-        <p class="font-light text-md md:text-lg pb-4">Check some of the projects I've created! Where I share my good and no-so-good progress in <a href="https://github.com/LouiScura/" class="text-blue-600" target="_blank">GitHub</a> :D</p>
+        <h2 class="font-semibold text-sub-title py-2">Featured Projects</h2>
+        <p class="font-light text-base pb-4">Check some of the projects I've created! Where I share my good and no-so-good progress in <a href="https://github.com/LouiScura/" class="text-blue-600" target="_blank">GitHub</a> :D</p>
         <div class="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 md:gap-10">
             <div v-for="project in props.projects" class="w-48 md:w-full flex-shrink-0 flex-grow-0 relative">
                 <img src="/images/placeholder2.png" class="w-full rounded-2xl" alt="Placeholder"/>
