@@ -5,6 +5,10 @@ import {onMounted} from "vue";
 const props = defineProps({
    posts: Object
 });
+
+onMounted(()=>{
+    console.log(props.posts[0].slug)
+})
 </script>
 
 <template>
@@ -17,7 +21,7 @@ const props = defineProps({
         <div class="md:flex gap-4 md:gap-6">
             <!-- Latest post-->
             <div class="w-full md:w-96 py-2 md:relative md:overflow-hidden">
-                <Link :href="props.posts[0].slug">
+                <Link :href="`blog/${props.posts[0].slug}`">>
                     <div class="md:h-2/4">
                         <img src="/images/placeholder2.png" alt="Placeholder" class="w-full object-cover">
                     </div>

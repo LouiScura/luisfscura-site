@@ -30,15 +30,17 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return Inertia::render('Post', [
+
+        return Inertia::render('Posts/Show', [
             'post' => $post->only(
                 'id',
                 'title',
                 'body',
                 'slug',
                 'excerpt',
-                'image'
-            ),
+                'image',
+                'created_at'
+            )
         ]);
     }
 }

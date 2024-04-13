@@ -21,7 +21,9 @@ export default {
                 'custom-black': '#0C0C0C',
                 'body-bg': '#0F1419',
                 'custom-grey': '#F5F5F5',
-                'custom-border': '#3E4144'
+                'custom-border': '#3E4144',
+                'custom-admin-bg': '#2E2F44',
+                'custom-admin-border': '#545F71'
             },
             fontSize: {
                 'md': '0.9rem',

@@ -5,6 +5,7 @@ import PrimaryLink from "@/Components/PrimaryLink.vue";
 import ProjectTiles from "@/Components/ProjectTiles.vue";
 import PostTiles from "@/Components/PostTiles.vue";
 import {onMounted} from "vue";
+import TechTools from "@/Components/TechTools.vue";
 
 const props = defineProps({
     tags: { type: Object },
@@ -41,18 +42,7 @@ const props = defineProps({
                     <p class="font-light py-2">
                         Just me here, dabbling and juggling a few tech tools. Not exactly a tech guru, but I've got my hands on some interesting gadgets and gizmos in the tech world. Here’s a quick tour of what’s in my toolkit:
                     </p>
-                    <ol class="list-disc list-inside marker:text-custom-orange">
-                        <li>HTML (of course)</li>
-                        <li>CSS / Tailwind</li>
-                        <li>JavaScript / Vue JS</li>
-                        <li>PHP / Laravel</li>
-                        <li>API</li>
-                        <li>MySQL</li>
-                        <li>GIT</li>
-                        <li>Linux Server</li>
-                        <li>WordPress</li>
-                        <li>Hosting </li>
-                    </ol>
+                    <TechTools/>
                 </div>
                 <div class="hidden md:block w-80 mr-16">
                     <img

@@ -5,8 +5,12 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\Pages\AdminPostController;
+use App\Http\Controllers\Auth\Pages\AdminCategoryController;
 use App\Models\Project;
 use App\Models\Post;
+
+// Homepage
 
 Route::get('/', function () {
     return Inertia::render('Home', [
@@ -27,9 +31,13 @@ Route::get('/', function () {
         ]);
 });
 
+// Blog
+
 Route::get('/blog', [PostController::class, 'index']);
 
 Route::get('/blog/{post:slug}', [PostController::class, 'show']);
+
+// Now
 
 Route::get('/now', function() {
     return Inertia::render('Now');
@@ -39,10 +47,22 @@ Route::get('/now', function() {
 //    return Inertia::render('Dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
-//Route::middleware('auth')->group(function () {
-//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-//});
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Admin Posts
+Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/admin/posts/create', [AdminPostController::class, 'create'])->middleware(['auth', 'verified']);
+
+// Admin Categories
+Route::get('/admin/categories', [AdminCategoryController::class, 'index'])->middleware(['auth', 'verified']);
+
+Route::post('/admin/categories', [AdminCategoryController::class, 'store']);
+
+Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

@@ -20,4 +20,9 @@ class Post extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('F j, Y');
+    }
 }

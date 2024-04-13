@@ -1,14 +1,35 @@
 <script setup>
 
 import {Link} from "@inertiajs/vue3";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import MobileMenu from "@/Components/Header/MobileMenu.vue";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+
+const changeColor = false;
+const scrollPosition = null;
 
 const mobileMenu = ref(false);
+
+onMounted(() => {
+    console.log(window.scrollY);
+})
+
+function updateScroll(){
+    const test = this.scrollPosition = window.scrollY
+
+    console.log(window.scrollY)
+}
+
 </script>
 
 <template>
-    <header class="bg-custom-black font-albert">
+    <header class="bg-custom-black font-albert py-1 sticky top-0 z-10">
+        <div v-if="$page.props.auth.user" class="bg-custom-orange text-white text-center">
+            <Link
+                href="/admin/posts">
+                You are logged in!
+            </Link>
+        </div>
         <div class="max-w-5xl mx-auto w-full md:px-8">
             <div class="flex items-center justify-between text-xl px-6 md:px-0">
                 <div class="py-4">
