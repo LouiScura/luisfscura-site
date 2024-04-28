@@ -16,8 +16,8 @@ const props = defineProps({
 
 <template>
     <Head title="Web Developer" />
-    <MainLayout classes="text-neutral-100 py-8 md:py-10">
-        <div class="max-w-5xl mx-auto w-full px-6 mb-8 md:mb-10">
+    <MainLayout classes="text-neutral-100 py-8 md:py-10 relative">
+        <div class="max-w-5xl mx-auto w-full px-6 mb-8 md:mb-10 z-20">
             <!-- Component title/description? for every page-->
             <section class="md:flex items-center">
                 <div class="hidden md:block w-72 mr-16">

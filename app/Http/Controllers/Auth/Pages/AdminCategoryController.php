@@ -39,4 +39,12 @@ class AdminCategoryController extends Controller
 
     }
 
+    public function destroy(Category $category)
+    {
+        $category->delete();
+        sleep(1);
+
+        return redirect()->route('category.index')->with('deletion', 'Category deleted successfully');
+    }
+
 }

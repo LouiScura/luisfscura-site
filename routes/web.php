@@ -58,11 +58,16 @@ Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware(['
 
 Route::get('/admin/posts/create', [AdminPostController::class, 'create'])->middleware(['auth', 'verified']);
 
+Route::post('/admin/posts', [AdminPostController::class, 'store']);
+
 // Admin Categories
-Route::get('/admin/categories', [AdminCategoryController::class, 'index'])->middleware(['auth', 'verified']);
+Route::get('/admin/categories', [AdminCategoryController::class, 'index'])->middleware(['auth', 'verified'])->name('category.index');
 
 Route::post('/admin/categories', [AdminCategoryController::class, 'store']);
 
 Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->middleware(['auth', 'verified']);
+
+Route::delete('/admin/{category}',[AdminCategoryController::class,'destroy'])->name('category.destroy');
+
 
 require __DIR__.'/auth.php';

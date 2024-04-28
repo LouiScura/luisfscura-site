@@ -11,16 +11,13 @@ class PostController extends Controller
 {
     public function index()
     {
-        $categories = Category::all()->map->only(
-            'id',
-            'name'
-        );
-
-        $posts = Post::with(['categories' => fn($query) =>
-                $query->select('category_id', 'name')
-            ])
+        $posts = Post::with(['categories' => function ($query) {
+            $query->select('category_id', 'name');
+        }])
             ->select(['id', 'title', 'body', 'slug', 'excerpt', 'image'])
             ->simplePaginate(5);
+
+        $categories = $posts->pluck('categories')->collapse()->unique('category_id');
 
         return Inertia::render('Blog', [
             'categories' => $categories,
