@@ -5,14 +5,10 @@ import {onMounted} from "vue";
 const props = defineProps({
    posts: Object
 });
-
-onMounted(()=>{
-    console.log(props.posts[0].slug)
-})
 </script>
 
 <template>
-    <section class="max-w-5xl mx-auto w-full px-6 mb-8 py-8">
+    <section class="max-w-5xl mx-auto w-full px-6 mb-8 lg:py-8">
         <div class="flex items-center space-x-3">
             <h2 class="text-sub-title font-semibold py-4">Review my latest articles!</h2>
             <Link href="/blog" class="text-custom-orange underline text-sm">Read more</Link>

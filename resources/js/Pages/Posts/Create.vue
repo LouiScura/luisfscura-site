@@ -1,8 +1,11 @@
 <script setup>
 import {Head, Link, useForm} from '@inertiajs/vue3';
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import AsideLinks from "@/Components/AsideLinks.vue";
+import MultiSelect from 'primevue/multiselect';
+import FileUpload from 'primevue/fileupload';
+
 
 const form = useForm({
     title: '',
@@ -17,6 +20,16 @@ const props = defineProps({
     categories: Object
 });
 
+const categoryOptions = ref([]);
+if (props.categories) {
+    categoryOptions.value = Object.keys(props.categories).map(key => ({
+        name: props.categories[key].name,
+        code: props.categories[key].id  // Assuming each category has a 'name' and 'id'
+    }));
+}
+
+const selectedCategories = ref([]);
+
 onMounted(() => {
     ClassicEditor
         .create(document.querySelector('#editor'))
@@ -26,9 +39,6 @@ onMounted(() => {
 });
 
 const store = () => {
-
-    // console.log('hola');
-
     form.post('/admin/posts');
 };
 
@@ -62,12 +72,20 @@ const store = () => {
                         <div class="mb-6">
                             <label class="block font-bold text-sm text-gray-200 mt-6" for="categories">Choose a category:</label>
 
-                            <select name="categories" id="categories" class="text-gray-200 bg-custom-admin-bg rounded-xl border border-custom-border my-2 p-3 w-96">
-                                <option v-for="category in categories" :value="category.name">{{ category.name }}</option>
-                            </select>
+                                <MultiSelect v-model="selectedCategories" display="chip" :options="categoryOptions" optionLabel="name" placeholder="Select Categories"
+                                         :maxSelectedLabels="3" class="text-gray-200 bg-custom-admin-bg rounded-xl border border-custom-border my-2 p-1 w-96"
+                                    :pt="{list: {class: 'bg-primary text-white'},
+                                        header: {class: 'bg-primary flex text-white justify-between border-0 mt-5'}}"
+                                />
 
-                            <div v-if="form.errors.categoryId" v-text="form.errors.categoryId" class="text-red-500 text-xs mt-1"></div>
+<!--                            <div v-if="form.errors.categoryId" v-text="form.errors.categoryId" class="text-red-500 text-xs mt-1"></div>-->
                         </div>
+
+<!--                        <div class="card flex justify-content-center">-->
+<!--                            <MultiSelect v-model="selectedCities" :options="cities" optionLabel="name" placeholder="Select Cities"-->
+<!--                                         :maxSelectedLabels="3" class="custom-multiselect w-full md:w-20rem bg-blue-950"-->
+<!--                            />-->
+<!--                        </div>-->
 
 <!--                        <div class="mb-6">-->
 <!--                            <label class="block font-bold text-sm text-gray-200 mt-6" for="body">Body</label>-->
@@ -93,6 +111,7 @@ const store = () => {
 
 <!--                        <div class="mb-6">-->
 <!--                            <input type="file" @input="form.image = $event.target.files[0]" />-->
+                            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
 <!--                            <progress v-if="form.progress" :value="form.progress.percentage" max="100">-->
 <!--                                {{ form.progress.percentage }}%-->
 <!--                            </progress>-->
@@ -112,3 +131,10 @@ const store = () => {
         </div>
     </AuthenticatedLayout>
 </template>
+
+<style scoped>
+    .custom-multiselect .p-multiselect-panel .p-multiselect-panel .p-multiselect-items {
+        @apply bg-blue-500 text-white;  /* Change 'bg-blue-500' and 'text-white' to your preferred Tailwind classes */
+    }
+
+</style>

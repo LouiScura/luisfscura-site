@@ -17,7 +17,7 @@ const props = defineProps({
 <template>
     <Head title="Web Developer" />
     <MainLayout classes="text-neutral-100 py-8 md:py-10 relative">
-        <div class="max-w-5xl mx-auto w-full px-6 mb-8 md:mb-10 z-20">
+        <div class="max-w-5xl mx-auto w-full px-6 mb-8 md:mb-10">
             <!-- Component title/description? for every page-->
             <section class="md:flex items-center">
                 <div class="hidden md:block w-72 mr-16">
@@ -34,7 +34,7 @@ const props = defineProps({
             </section>
         </div>
         <ProjectTiles :tags="tags" :projects="projects"/>
-        <div class="max-w-5xl mx-auto w-full px-6 mb-8 py-8 md:mt-8">
+        <div class="max-w-5xl mx-auto w-full px-6 lg:mb-8 py-8 md:mt-8">
             <!-- Component title/description? for every page-->
             <section class="md:flex items-center">
                 <div class="text-custom-grey flex-1 pr-10">

@@ -40,9 +40,19 @@ function destroy(id) {
                     <div class="flex mt-8 flex-wrap">
                         <div class="flex items-center w-6/12" v-for="category in categories">
                             <p class="text-gray-200 bg-custom-admin-bg rounded-xl border border-custom-border p-2 w-96"> {{ category.name }} </p>
-                            <button class="group/edit group-hover/item:visible h-6 w-6 flex-1 my-6" type="button" @click="destroy(category.id)">
-                                <img src="/images/cross-circle.svg" class="h-full w-full" alt="Cross Icon"/>
-                            </button>
+
+                            <div class="flex flex-1 items-center justify-center gap-4">
+                                <Link :href="route('category.edit', category.id)" class="" title="Edit Category">
+                                    <img src="/images/edit-button.svg" class="h-6 w-6" alt="Edit Button"/>
+                                </Link>
+                                <button class="group/edit group-hover/item:visible h-6 w-6  my-6"
+                                        type="button"
+                                        @click="destroy(category.id)"
+                                        title="Delete Category"
+                                >
+                                    <img src="/images/cross-circle.svg" class="h-full w-full" alt="Cross Icon"/>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

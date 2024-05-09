@@ -19,7 +19,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'posts' => Post::query()
-            ->select(['id', 'title', 'body', 'slug', 'excerpt', 'image', 'created_at'])
+            ->select(['id', 'title', 'slug', 'excerpt', 'image'])
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get(),
@@ -66,6 +66,10 @@ Route::get('/admin/categories', [AdminCategoryController::class, 'index'])->midd
 Route::post('/admin/categories', [AdminCategoryController::class, 'store']);
 
 Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->middleware(['auth', 'verified']);
+
+Route::get('/admin/categories/{category}/edit', [AdminCategoryController::class, 'edit'])
+    ->name('category.edit')
+    ->middleware(['auth', 'verified']);
 
 Route::delete('/admin/{category}',[AdminCategoryController::class,'destroy'])->name('category.destroy');
 
