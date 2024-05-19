@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 use Inertia\Inertia;
 
 class AdminPostController extends Controller
@@ -25,23 +26,12 @@ class AdminPostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        $post = new Post($request->validated());
+        $post->save();
 
+        $post->categories()->sync($request->categories);
 
-
-
-
-//        dd($request);
-
-        // Retrieve the validated input data...
-//        $validated = $request->validated();
-
-//        dd($validated);
-
-
-//        $post =  Post::create($validated);
-
-
-
-        return 'you are hitting me';
+        return redirect('/admin/posts')
+            ->with('success', 'Post created successfully.');
     }
 }

@@ -36,6 +36,8 @@ onMounted(() => {
                 <AsideLinks/>
 
                 <div class="flex-1">
+                    <p v-if="$page.props.flash.success" class="text-green-300 pb-4">{{ $page.props.flash.success}}</p>
+                    <p v-if="$page.props.flash.deletion" class="text-red-300 font-bold pb-4">{{ $page.props.flash.deletion}}</p>
                     <div class="flex justify-between">
                         <h1 class="text-white text-xl font-semibold">All posts</h1>
                         <Link href="/admin/posts/create" class="text-custom-orange underline">Create post</Link>

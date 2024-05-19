@@ -27,6 +27,13 @@ class AdminCategoryController extends Controller
         return Inertia::render('Categories/Create');
     }
 
+    public function edit(Category $category)
+    {
+        return Inertia::render('Categories/Edit', [
+            'category' => $category->get()->map->only('id', 'name', 'slug')
+        ]);
+    }
+
     public function store(StoreCategoryRequest $request)
     {
         // Retrieve the validated input data...

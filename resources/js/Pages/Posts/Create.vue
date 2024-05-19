@@ -1,15 +1,16 @@
 <script setup>
 import {Head, Link, useForm} from '@inertiajs/vue3';
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import AsideLinks from "@/Components/AsideLinks.vue";
 import MultiSelect from 'primevue/multiselect';
 import FileUpload from 'primevue/fileupload';
 
+const selectedCategories = ref([]);
 
 const form = useForm({
     title: '',
-    category: '',
+    categories: selectedCategories,
     body: '',
     slug: '',
     excerpt: '',
@@ -24,19 +25,34 @@ const categoryOptions = ref([]);
 if (props.categories) {
     categoryOptions.value = Object.keys(props.categories).map(key => ({
         name: props.categories[key].name,
-        code: props.categories[key].id  // Assuming each category has a 'name' and 'id'
+        id: props.categories[key].id
     }));
 }
 
-const selectedCategories = ref([]);
+function handleUpload(event) {
+    // This function is triggered when the file is selected
+    // Set the file to the form
+    form.image = 'something here';
+}
 
 onMounted(() => {
     ClassicEditor
         .create(document.querySelector('#editor'))
+        .then(editor => {
+            window.editor = editor;
+            // Update Vue model whenever the editor data changes
+            editor.model.document.on('change:data', () => {
+                form.body = editor.getData();
+            });
+        })
         .catch(error => {
             console.error('There was a problem initializing the editor:', error);
         });
 });
+
+watch(selectedCategories, (newVal) => {
+    form.categories = newVal.map(item => item.id);
+}, { deep: true });
 
 const store = () => {
     form.post('/admin/posts');
@@ -56,6 +72,10 @@ const store = () => {
 
                 <!-- Form -->
                 <div class="flex-1">
+
+                    <p v-if="$page.props.flash.success" class="text-green-300 pb-4">{{ $page.props.flash.success}}</p>
+                    <p v-if="$page.props.flash.deletion" class="text-red-300 font-bold pb-4">{{ $page.props.flash.deletion}}</p>
+
                     <div class="flex justify-between">
                         <h1 class="text-white text-xl font-semibold">Create an amazing post!</h1>
                     </div>
@@ -78,22 +98,16 @@ const store = () => {
                                         header: {class: 'bg-primary flex text-white justify-between border-0 mt-5'}}"
                                 />
 
-<!--                            <div v-if="form.errors.categoryId" v-text="form.errors.categoryId" class="text-red-500 text-xs mt-1"></div>-->
+                            <div v-if="form.errors.categories" v-text="form.errors.categories" class="text-red-500 text-xs mt-1"></div>
                         </div>
 
-<!--                        <div class="card flex justify-content-center">-->
-<!--                            <MultiSelect v-model="selectedCities" :options="cities" optionLabel="name" placeholder="Select Cities"-->
-<!--                                         :maxSelectedLabels="3" class="custom-multiselect w-full md:w-20rem bg-blue-950"-->
-<!--                            />-->
-<!--                        </div>-->
+                        <div class="mb-6">
+                            <label class="block font-bold text-sm text-gray-200 mt-6" for="body">Body</label>
 
-<!--                        <div class="mb-6">-->
-<!--                            <label class="block font-bold text-sm text-gray-200 mt-6" for="body">Body</label>-->
+                            <textarea id="editor" name="body"></textarea>
 
-<!--                            <textarea id="editor" name="body"></textarea>-->
-
-<!--                            <div v-if="form.errors.body" v-text="form.errors.body" class="text-red-500 text-xs mt-1"></div>-->
-<!--                        </div>-->
+                            <div v-if="form.errors.body" v-text="form.errors.body" class="text-red-500 text-xs mt-1"></div>
+                        </div>
 
                         <div class="mb-6">
                             <label class="block font-bold text-sm text-gray-200 mt-6" for="title"> Slug </label>
@@ -109,13 +123,18 @@ const store = () => {
                             <textarea name="excerpt" class="text-gray-200 bg-custom-admin-bg rounded-xl border border-custom-border my-2 p-3 w-3/4"></textarea>
                         </div>
 
-<!--                        <div class="mb-6">-->
-<!--                            <input type="file" @input="form.image = $event.target.files[0]" />-->
-                            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" :maxFileSize="1000000" @upload="onUpload" />
-<!--                            <progress v-if="form.progress" :value="form.progress.percentage" max="100">-->
-<!--                                {{ form.progress.percentage }}%-->
-<!--                            </progress>-->
-<!--                        </div>-->
+                        <div class="mb-6">
+                            <FileUpload mode="basic"
+                                        name="image"
+                                        accept="image/*"
+                                        :maxFileSize="1000000"
+                                        @upload="handleUpload"
+                                        :auto="false"
+                                        :chooseLabel="'Choose'" />
+                            <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                                {{ form.progress.percentage }}%
+                            </progress>
+                        </div>
 
                         <div :disabled="form.processing" class="flex items-center mb-10">
                             <button type="submit" class="bg-custom-orange text-white rounded py-2 px-4 w-52">Create</button>

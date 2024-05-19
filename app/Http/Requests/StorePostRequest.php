@@ -23,11 +23,11 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:70'],
-            'categoryId' => ['required', 'string'],
-//            'body' => ['required'],
+            'categories' => ['required', 'array'],
+            'body' => ['required'],
             'slug' => ['required', 'unique:posts', 'max:75'],
             'excerpt' => ['nullable', 'max:255'],
-            'image' => ['nullable', 'file', 'size:512'],
+            'image' => ['nullable', 'image', 'size:512'],
         ];
     }
 }

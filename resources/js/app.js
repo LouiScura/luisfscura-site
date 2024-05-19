@@ -5,8 +5,9 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
+import PrimeVue from "primevue/config";
+import Lara from '../css/presents/index.js';
+import ToastService from 'primevue/toastservice';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -16,12 +17,14 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(PrimeVue , {
+                unstyled: true,
+                pt: Lara
+            })
+            .use(ToastService)
             .mount(el);
     },
     progress: {
         color: '#4B5563',
     },
 });
-
-// Make CKEditor available globally or initialize directly
-window.ClassicEditor = ClassicEditor;

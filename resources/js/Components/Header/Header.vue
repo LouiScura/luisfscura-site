@@ -5,20 +5,7 @@ import {onMounted, ref} from "vue";
 import MobileMenu from "@/Components/Header/MobileMenu.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
-const changeColor = false;
-const scrollPosition = null;
-
 const mobileMenu = ref(false);
-
-onMounted(() => {
-    console.log(window.scrollY);
-})
-
-function updateScroll(){
-    const test = this.scrollPosition = window.scrollY
-
-    console.log(window.scrollY)
-}
 
 </script>
 

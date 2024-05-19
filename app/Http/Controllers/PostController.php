@@ -34,7 +34,6 @@ class PostController extends Controller
                 'title',
                 'body',
                 'slug',
-                'excerpt',
                 'image',
                 'created_at'
             )

@@ -5,6 +5,7 @@ import {onMounted} from "vue";
 const props = defineProps({
    posts: Object
 });
+
 </script>
 
 <template>
@@ -14,11 +15,11 @@ const props = defineProps({
             <Link href="/blog" class="text-custom-orange underline text-sm">Read more</Link>
         </div>
 
-        <div class="md:flex gap-4 md:gap-6">
+        <div class="md:flex gap-4 md:gap-2 lg:gap-6">
             <!-- Latest post -->
-            <div class="w-full md:w-96 py-2 md:relative md:overflow-hidden">
+            <div class="w-full md:w-2/5 lg:w-5/12 py-2 md:relative md:overflow-hidden">
                 <Link :href="`blog/${props.posts[0].slug}`">
-                    <div class="md:h-2/4">
+                    <div class="">
                         <img src="/images/placeholder2.png" alt="Placeholder" class="w-full object-cover">
                     </div>
                     <div class="bg-primary p-4 md:h-full">
@@ -29,15 +30,17 @@ const props = defineProps({
             </div>
 
             <!-- Rest of posts -->
-            <div class="flex flex-1 flex-wrap gap-4 md:gap-6 mt-2 md:w-full">
-                <div v-for="post in props.posts.slice(1)" class="w-48 md:w-56">
-                    <div class="">
-                        <img src="/images/placeholder2.png" alt="Placeholder" class="w-full md:h-28 object-cover">
-                    </div>
-                    <div class="bg-primary p-4">
-                        <h3 class="font-semibold py-2">{{ post.title }}</h3>
-                        <p class="font-light text-md">{{ post.excerpt }}</p>
-                    </div>
+            <div class="flex flex-1 flex-wrap gap-4 md:gap-2 lg:gap-6 mt-2 w-full">
+                <div v-for="(post, index) in props.posts.slice(1)" :key="index" class="w-full md:w-[48.5%] lg:w-5/12">
+                    <Link :href="`blog/${post.slug}`">
+                        <div class="">
+                            <img src="/images/placeholder2.png" alt="Placeholder" class="w-full md:h-28 object-cover">
+                        </div>
+                        <div class="bg-primary p-4">
+                            <h3 class="font-semibold py-2">{{ post.title }}</h3>
+                            <p class="font-light text-md">{{ post.excerpt }}</p>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>

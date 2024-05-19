@@ -7,6 +7,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\Pages\AdminPostController;
 use App\Http\Controllers\Auth\Pages\AdminCategoryController;
+use App\Http\Controllers\Auth\Pages\AdminProjectController;
+use App\Http\Controllers\Auth\Pages\AdminTagController;
 use App\Models\Project;
 use App\Models\Post;
 
@@ -35,7 +37,7 @@ Route::get('/', function () {
 
 Route::get('/blog', [PostController::class, 'index']);
 
-Route::get('/blog/{post:slug}', [PostController::class, 'show']);
+Route::get('/blog/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 // Now
 
@@ -72,6 +74,12 @@ Route::get('/admin/categories/{category}/edit', [AdminCategoryController::class,
     ->middleware(['auth', 'verified']);
 
 Route::delete('/admin/{category}',[AdminCategoryController::class,'destroy'])->name('category.destroy');
+
+// Admin Projects
+Route::get('/admin/projects', [AdminProjectController::class, 'index'])->name('project.index');
+
+// Admin Tags
+Route::get('/admin/tags', [AdminTagController::class, 'index']);
 
 
 require __DIR__.'/auth.php';
