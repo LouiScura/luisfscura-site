@@ -35,9 +35,9 @@ Route::get('/', function () {
 
 // Blog
 
-Route::get('/blog', [PostController::class, 'index']);
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
-Route::get('/blog/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/blog/{category?}', [PostController::class, 'index']);
 
 // Now
 
@@ -56,11 +56,12 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin Posts
-Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/admin/posts/create', [AdminPostController::class, 'create'])->middleware(['auth', 'verified']);
-
-Route::post('/admin/posts', [AdminPostController::class, 'store']);
+Route::prefix('admin')->group(function () {
+    Route::resource('posts', AdminPostController::class)
+        ->names([
+            'index'   => 'dashboard',
+        ]);
+});
 
 // Admin Categories
 Route::get('/admin/categories', [AdminCategoryController::class, 'index'])->middleware(['auth', 'verified'])->name('category.index');
@@ -71,6 +72,10 @@ Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'
 
 Route::get('/admin/categories/{category}/edit', [AdminCategoryController::class, 'edit'])
     ->name('category.edit')
+    ->middleware(['auth', 'verified']);
+
+Route::put('/admin/categories/{category}', [AdminCategoryController::class, 'update'])
+    ->name('category.update')
     ->middleware(['auth', 'verified']);
 
 Route::delete('/admin/{category}',[AdminCategoryController::class,'destroy'])->name('category.destroy');

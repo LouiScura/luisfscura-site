@@ -30,13 +30,12 @@ class AdminCategoryController extends Controller
     public function edit(Category $category)
     {
         return Inertia::render('Categories/Edit', [
-            'category' => $category->get()->map->only('id', 'name', 'slug')
+            'category' => $category->only('id', 'name', 'slug')
         ]);
     }
 
     public function store(StoreCategoryRequest $request)
     {
-        // Retrieve the validated input data...
         $validated = $request->validated();
 
         Category::create($validated);
@@ -44,6 +43,14 @@ class AdminCategoryController extends Controller
         return redirect('/admin/categories')
             ->with('success', 'Category created successfully.');
 
+    }
+
+    public function update(Category $category, StoreCategoryRequest $request)
+    {
+        $category->update($request->validated());
+
+        return redirect('/admin/categories')
+            ->with('success', 'Category updated successfully.');
     }
 
     public function destroy(Category $category)

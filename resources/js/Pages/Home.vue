@@ -38,9 +38,9 @@ const props = defineProps({
             <!-- Component title/description? for every page-->
             <section class="md:flex items-center">
                 <div class="text-custom-grey flex-1 pr-10">
-                    <h2 class="text-sub-title font-semibold">The Not-So-Secret Life of Me.</h2>
+                    <h2 class="text-sub-title font-semibold">Few tech tools I know</h2>
                     <p class="font-light py-2">
-                        Just me here, dabbling and juggling a few tech tools. Not exactly a tech guru, but I've got my hands on some interesting gadgets and gizmos in the tech world. Here’s a quick tour of what’s in my toolkit:
+                        Not exactly a tech guru, but I've got my hands on some interesting gadgets and gizmos in the tech world. Here’s a quick tour of what’s in my toolkit:
                     </p>
                     <TechTools/>
                 </div>

@@ -2,26 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\CategoryResource;
 use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Category $category = null)
     {
-        $posts = Post::with(['categories' => function ($query) {
-            $query->select('category_id', 'name');
-        }])
-            ->select(['id', 'title', 'body', 'slug', 'excerpt', 'image'])
-            ->simplePaginate(5);
+        $posts = Post::with('categories')
+            ->when($category, function ($query) use ($category) {
+                $query->whereHas('categories', function ($query) use ($category) {
+                    $query->where('categories.id', $category->id);
+                });
+            })
+            ->latest()
+            ->latest('created_at')
+            ->paginate(9);
 
-        $categories = $posts->pluck('categories')->collapse()->unique('category_id');
+        $categories = Category::has('posts')->get();
 
-        return Inertia::render('Blog', [
-            'categories' => $categories,
-            'posts' => $posts
+        return inertia('Blog', [
+            'posts' => PostResource::collection($posts),
+            'categories' => CategoryResource::collection($categories),
+            'selectedCategory' => fn () => $category ? CategoryResource::make($category) : null,
         ]);
     }
 

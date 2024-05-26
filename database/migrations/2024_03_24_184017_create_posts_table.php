@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title', length: 100);
             $table->longText('body');
             $table->tinyText('slug');
-            $table->text('excerpt')->nullable();
+            $table->text('excerpt');
             $table->string('image')->nullable();
             $table->timestamps();
         });

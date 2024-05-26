@@ -8,17 +8,21 @@ const props = defineProps({
     required: true
 })
 
-const form = useForm(props.category)
+const form = useForm({
+    name: props.category.name,
+    slug: props.category.slug
+})
 
 const update = () => {
-    form.put('/admin/categories');
+    form.put(`/admin/categories/${props.category.id}`)
 };
+
 
 console.log(form)
 </script>
 
 <template>
-    <Head title="Create a Category" />
+    <Head title="Update Category" />
 
     <AuthenticatedLayout>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,7 +36,7 @@ console.log(form)
                         <h1 class="text-white text-xl font-semibold">Edit the category test: {{ form.name }} </h1>
                     </div>
 
-                    <form @submit.prevent="store">
+                    <form @submit.prevent="update">
                         <div class="mb-6">
                             <label class="block font-bold text-sm text-gray-200 mt-6" for="name"> Name </label>
 
@@ -50,9 +54,9 @@ console.log(form)
                         </div>
 
                         <button :disabled="form.processing" class="flex items-center">
-                            <button type="submit" class="bg-custom-orange text-white rounded py-2 px-4 w-52">Create</button>
+                            <button type="submit" class="bg-custom-orange text-white rounded py-2 px-4 w-52">Update</button>
                             <div v-if="form.processing" class="btn-spinner ml-2 text-custom-orange">
-                                Creating...
+                                Updating...
                             </div>
                         </button>
                     </form>

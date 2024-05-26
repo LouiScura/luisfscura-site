@@ -4,23 +4,31 @@ namespace App\Http\Controllers\Auth\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Resources\AdminPostResource;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
+use Illuminate\Database\Eloquent\Builder;
+
 use Inertia\Inertia;
 
 class AdminPostController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Posts/Index');
+        $posts = Post::latest('created_at')->paginate(14);
+
+        return Inertia::render('Posts/Index', [
+            'posts' => AdminPostResource::collection($posts)
+        ]);
     }
 
     public function create()
     {
         return Inertia::render('Posts/Create',  [
-            'categories' => Category::all()
+            'categories' => CategoryResource::collection(Category::all())
         ]);
     }
 
@@ -33,5 +41,13 @@ class AdminPostController extends Controller
 
         return redirect('/admin/posts')
             ->with('success', 'Post created successfully.');
+    }
+
+    public function edit(Post $post)
+    {
+        return Inertia::render('Posts/Edit', [
+            'post' => $post->only('id', 'title', 'slug', 'categories', 'body', 'excerpt'),
+            'categories' => CategoryResource::collection(Category::all())
+        ]);
     }
 }
