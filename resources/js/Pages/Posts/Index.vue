@@ -8,13 +8,13 @@ const props = defineProps({
     posts: Object
 });
 
+const form = useForm({});
+
 function destroy(id) {
     if (confirm("Are you sure you want to Delete?")) {
-        form.delete(route('post.destroy', id));
+        form.delete(route('posts.destroy', id));
     }
 }
-
-console.log(props.posts)
 
 </script>
 
@@ -38,7 +38,7 @@ console.log(props.posts)
                                 All posts
                             </Link>
                         </h1>
-                        <Link href="/admin/posts/create" class="text-custom-orange underline">Create post</Link>
+                        <Link :href="route('posts.create')" class="text-custom-orange underline">Create post</Link>
                     </div>
 
                     <div class="flex mt-8 flex-wrap items-start gap-4">

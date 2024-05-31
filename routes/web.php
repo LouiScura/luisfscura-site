@@ -13,7 +13,6 @@ use App\Models\Project;
 use App\Models\Post;
 
 // Homepage
-
 Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
@@ -34,20 +33,14 @@ Route::get('/', function () {
 });
 
 // Blog
-
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
-Route::get('/blog/{category?}', [PostController::class, 'index']);
+Route::get('/blog/{category:slug?}', [PostController::class, 'index']);
 
 // Now
-
 Route::get('/now', function() {
     return Inertia::render('Now');
 });
-
-//Route::get('/dashboard', function () {
-//    return Inertia::render('Dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -55,30 +48,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Admin Posts
-Route::prefix('admin')->group(function () {
+// Admin Posts and Categories
+Route::group(['prefix' => 'admin',  'middleware' => ['auth', 'verified']], function(){
     Route::resource('posts', AdminPostController::class)
         ->names([
             'index'   => 'dashboard',
         ]);
+
+    Route::resource('categories', AdminCategoryController::class);
 });
-
-// Admin Categories
-Route::get('/admin/categories', [AdminCategoryController::class, 'index'])->middleware(['auth', 'verified'])->name('category.index');
-
-Route::post('/admin/categories', [AdminCategoryController::class, 'store']);
-
-Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->middleware(['auth', 'verified']);
-
-Route::get('/admin/categories/{category}/edit', [AdminCategoryController::class, 'edit'])
-    ->name('category.edit')
-    ->middleware(['auth', 'verified']);
-
-Route::put('/admin/categories/{category}', [AdminCategoryController::class, 'update'])
-    ->name('category.update')
-    ->middleware(['auth', 'verified']);
-
-Route::delete('/admin/{category}',[AdminCategoryController::class,'destroy'])->name('category.destroy');
 
 // Admin Projects
 Route::get('/admin/projects', [AdminProjectController::class, 'index'])->name('project.index');

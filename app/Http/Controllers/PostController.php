@@ -22,7 +22,7 @@ class PostController extends Controller
             })
             ->latest()
             ->latest('created_at')
-            ->paginate(9);
+            ->paginate(12);
 
         $categories = Category::has('posts')->get();
 

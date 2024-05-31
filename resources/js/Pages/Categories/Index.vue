@@ -11,7 +11,7 @@ const form = useForm({});
 
 function destroy(id) {
     if (confirm("Are you sure you want to Delete?")) {
-        form.delete(route('category.destroy', id));
+        form.delete(route('categories.destroy', id));
     }
 }
 
@@ -34,7 +34,7 @@ function destroy(id) {
 
                     <div class="flex justify-between">
                         <h1 class="text-white text-xl font-semibold">All categories</h1>
-                        <Link href="/admin/categories/create" class="text-custom-orange underline">Create category</Link>
+                        <Link :href="route('categories.create')" class="text-custom-orange underline">Create category</Link>
                     </div>
 
                     <div class="flex mt-8 flex-wrap">
@@ -42,7 +42,7 @@ function destroy(id) {
                             <p class="text-gray-200 bg-custom-admin-bg rounded-xl border border-custom-border p-2 w-96"> {{ category.name }} </p>
 
                             <div class="flex flex-1 items-center justify-center gap-4">
-                                <Link :href="route('category.edit', category.id)" class="" title="Edit Category">
+                                <Link :href="route('categories.edit', category.id)" class="" title="Edit Category">
                                     <img src="/images/edit-button.svg" class="h-6 w-6" alt="Edit Button"/>
                                 </Link>
                                 <button class="group/edit group-hover/item:visible h-6 w-6  my-6"
