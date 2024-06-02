@@ -50,4 +50,11 @@ class AdminPostController extends Controller
             'categories' => CategoryResource::collection(Category::all())
         ]);
     }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Post deleted successfully');
+    }
 }
