@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class ProjectHomeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,12 +17,10 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'body' => $this->body,
-            'slug' => $this->slug,
-            'categories' => CategoryResource::collection($this->whenLoaded('categories')),
-            'excerpt' => $this->excerpt,
+            'description' => $this->description,
             'image' => $this->image,
-            'created_at' => $this->created_at,
+            'link' => $this->link,
+            'tags' => TagResource::collection($this->whenLoaded('tags'))
         ];
     }
 }

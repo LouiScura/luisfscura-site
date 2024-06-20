@@ -11,7 +11,7 @@ const emit = defineEmits(['projectClick']);
 
 function handleProjectClick(project){
     selectedProject.value = project;
-    dialog.value.showModal(); // Show the dialog
+    dialog.value.showModal();
     emit('projectClick', project);
 }
 

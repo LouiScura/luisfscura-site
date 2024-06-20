@@ -35,6 +35,13 @@ class AdminPostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = new Post($request->validated());
+
+        // Check if there is a file in the request
+        if ($request->hasFile('image')) {
+            $filePath = $request->file('image')->store('uploads', 'public');
+            $post->image  = $filePath;
+        }
+
         $post->save();
 
         $post->categories()->sync($request->categories);

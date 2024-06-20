@@ -1,36 +1,24 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue';
+import { defineProps } from 'vue';
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
-   categories: Object,
-   currentCategory: String
+    href: {
+        required: true
+    },
+    filled: {
+        default: false,
+    }
 });
 
-// Define the emit
-const emit = defineEmits(['categorySelected']);
-
-function selectCategory(category) {
-    emit('categorySelected', category);
-}
-
+console.log(props.filled);
 </script>
 
 <template>
-    <div>
-        <ul class="flex overflow-x-auto my-6 gap-4">
-            <li
-                @click="selectCategory('all')"
-                class="text-gray-400 shrink-0 w-24 rounded-2xl py-1 px-4 font-light text-[15px] text-center hover:bg-custom-orange hover:text-slate-50 cursor-pointer"
-                :class="{'bg-custom-orange text-slate-200': 'all' === props.currentCategory, 'bg-primary': 'all' !== props.currentCategory}">
-                All posts
-            </li>
-            <li v-for="category in categories"
-                @click="selectCategory(category.name)"
-                class="text-gray-400 shrink-0 w-24 rounded-2xl py-1 px-4 font-light text-[15px] text-center hover:bg-custom-orange hover:text-slate-50 cursor-pointer"
-                :key="category.id"
-                :class="{'bg-custom-orange text-slate-200': category.name === props.currentCategory, 'bg-primary': category.name !== props.currentCategory}">
-                {{ category.name }}
-            </li>
-        </ul>
-    </div>
+    <Link
+        :href="props.href"
+        class="text-gray-400 shrink-0 rounded-2xl font-light text-[15px] text-center hover:bg-custom-orange hover:text-slate-50 cursor-pointer py-1 px-4 leading-loose bg-primary"
+        :class="{ '!bg-custom-orange !text-slate-50': filled }">
+        <slot></slot>
+    </Link>
 </template>

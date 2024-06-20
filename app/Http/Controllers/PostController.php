@@ -21,7 +21,6 @@ class PostController extends Controller
                 });
             })
             ->latest()
-            ->latest('created_at')
             ->paginate(12);
 
         $categories = Category::has('posts')->get();
@@ -42,6 +41,7 @@ class PostController extends Controller
                 'title',
                 'body',
                 'slug',
+                'categories',
                 'image',
                 'created_at'
             )

@@ -14,7 +14,7 @@ const form = useForm({
     body: '',
     slug: '',
     excerpt: '',
-    image: ''
+    image: null
 })
 
 const props = defineProps({
@@ -27,10 +27,6 @@ if (props.categories.data) {
         name: props.categories.data[key].name,
         id: props.categories.data[key].id
     }));
-}
-
-function handleUpload(event) {
-    form.image = 'something here';
 }
 
 onMounted(() => {
@@ -117,17 +113,15 @@ const store = () => {
                         <div class="mb-6">
                             <label class="block font-bold text-sm text-gray-200 mt-6" for="excerpt">Excerpt</label>
 
-                            <textarea name="excerpt" class="text-gray-200 bg-custom-admin-bg rounded-xl border border-custom-border my-2 p-3 w-3/4"></textarea>
+                            <textarea name="excerpt" v-model="form.excerpt" class="text-gray-200 bg-custom-admin-bg rounded-xl border border-custom-border my-2 p-3 w-3/4" required></textarea>
+
+                            <div v-if="form.errors.excerpt" v-text="form.errors.excerpt" class="text-red-500 text-xs mt-1"></div>
                         </div>
 
                         <div class="mb-6">
-                            <FileUpload mode="basic"
-                                        name="image"
-                                        accept="image/*"
-                                        :maxFileSize="1000000"
-                                        @upload="handleUpload"
-                                        :auto="false"
-                                        :chooseLabel="'Choose'" />
+                            <input type="file" @input="form.image = $event.target.files[0]" />
+
+                            <div v-if="form.errors.image" v-text="form.errors.image" class="text-red-500 text-xs mt-1"></div>
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%
                             </progress>

@@ -1,11 +1,11 @@
 <script setup>
-    const tools = ['HTML (of course)', 'CSS / Tailwind', 'JavaScript / Vue JS', 'PHP / Laravel', 'API', 'MySQL',
-            'SQL Lite', 'Version Control', 'Linux Server', 'WordPress', 'Hosting'
+    const tools = ['HTML (of course)', 'CSS / Tailwind', 'JavaScript / Vue JS', 'PHP / Laravel', 'RESTful APIs', 'MySQL',
+            'Testing', 'SQL Lite', 'Version Control', 'Linux Server', 'WordPress', 'Hosting', 'SEO', 'Drupal', 'Figma / Adobe'
         ]
 </script>
 
 <template>
-    <ol class="flex flex-wrap lg:justify-between gap-3 py-3">
+    <ol class="flex flex-wrap gap-3 py-3">
         <li
             v-for="(tool, index) in tools"
             :class="{'border-amber-900': index % 2 === 0, 'border-blue-900': index % 2 !== 0 }"

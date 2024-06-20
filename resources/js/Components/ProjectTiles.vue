@@ -6,12 +6,13 @@ let selectedProject = ref(null);
 
 const props = defineProps({
     projects: Object,
-    tags: Object
 })
 function handleProjectClick(project){
     selectedProject.value = project;
     dialog.value.showModal(); // Show the dialog
 }
+
+console.log(props.projects[0].tags)
 </script>
 
 <template>
@@ -27,10 +28,12 @@ function handleProjectClick(project){
                  class="w-48 md:w-full flex-shrink-0 flex-grow-0 relative cursor-pointer"
                  @click="handleProjectClick(project)"
             >
-                <img src="/images/placeholder2.png" class="w-full rounded-2xl" alt="Placeholder"/>
+                <img :src="project.image || '/images/placeholder2.png'" alt="Placeholder" class="w-full object-cover rounded-2xl">
                 <ul class="flex absolute bottom-5 left-1/2 transform -translate-x-1/2 space-x-3">
-                    <li v-for="tag in project.tags" :key="tag.id" class="rounded-lg bg-custom-black opacity-50 flex-shrink-0 flex-grow-0 py-1 px-1 md:px-2">
-                        {{ tag.name}}
+                    <li v-for="tag in project.tags"
+                        :key="tag.id"
+                        class="rounded-lg bg-blue-600 text-black font-semibold text-xs md:text-sm opacity-50 flex-shrink-0 flex-grow-0 py-1 px-1 md:px-2"
+                        v-text="tag.name">
                     </li>
                 </ul>
             </div>

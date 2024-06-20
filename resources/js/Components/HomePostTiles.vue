@@ -19,7 +19,7 @@ const props = defineProps({
             <div class="w-full md:w-2/5 lg:w-5/12 py-2 md:relative md:overflow-hidden">
                 <Link :href="route('post.show', props.posts[0].slug)">
                     <div class="">
-                        <img src="/images/placeholder2.png" alt="Placeholder" class="w-full object-cover">
+                        <img :src="props.posts[0].image || '/images/placeholder2.png'" alt="Placeholder" class="w-full object-cover">
                     </div>
                     <div class="bg-primary p-4 md:h-full">
                         <h3 class="font-semibold py-2">{{ props.posts[0].title}}</h3>
@@ -33,7 +33,7 @@ const props = defineProps({
                 <div v-for="(post, index) in props.posts.slice(1)" :key="index" class="w-full md:w-[48.5%] lg:w-5/12">
                     <Link :href="route('post.show', post.slug)">
                         <div class="">
-                            <img src="/images/placeholder2.png" alt="Placeholder" class="w-full md:h-28 object-cover">
+                            <img :src="post.image || '/images/placeholder2.png'" alt="Placeholder" class="w-full md:h-28 object-cover">
                         </div>
                         <div class="bg-primary p-4">
                             <h3 class="font-semibold py-2">{{ post.title }}</h3>

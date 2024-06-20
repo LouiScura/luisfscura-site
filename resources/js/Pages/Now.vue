@@ -18,9 +18,10 @@ import {Head} from "@inertiajs/vue3";
                 <li class="text-md md:text-lg">Working as a web developer at <a href="https://creatingdigital.com" target="_blank" class="text-custom-orange">Creating Digital LLC</a></li>
                 <li class="text-md md:text-lg">Transforming beautiful designs into pixel-perfect websites with <a href="https://tailwindcss.com/" class="text-blue-400" target="_blank">Tailwind CSS.</a></li>
                 <li class="text-md md:text-lg">Embarking on side projects with <a href="https://laravel.com" class="text-red-800" target="_blank">Laravel</a> and <a href="https:/vuejs.org" target="_blank" class="text-green-800">Vue JS</a>  🚀</li>
+                <li class="text-md md:text-lg">Creating spanish <a href="https://www.youtube.com/@scuraluis" target="_blank" class="underline decoration-custom-orange">YouTube Videos</a> about Laravel, Vue, Inertia</li>
                 <li class="text-md md:text-lg">Boxing as a hobby. 🥊</li>
             </ol>
-            <span class="block text-gray-300 font-light italic py-8">Last updated 3/27/24</span>
+            <span class="block text-gray-300 font-light italic py-8">Last updated 6/10/24</span>
         </div>
     </MainLayout>
 </template>

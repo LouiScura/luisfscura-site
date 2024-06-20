@@ -1,7 +1,6 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {onMounted} from "vue";
 import {Head} from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -10,7 +9,7 @@ const props = defineProps({
     }
 });
 
-onMounted(() => console.log(props.post));
+console.log(props.post)
 </script>
 
 <template>
@@ -20,8 +19,13 @@ onMounted(() => console.log(props.post));
     <MainLayout>
         <div class="max-w-5xl mx-auto w-full px-6 md:px-8 mt-10">
             <h2 class="text-neutral-100 text-xl md:text-2xl pb-4">{{ props.post.title }}</h2>
+            <ul class="flex gap-4 text-sm pb-4">
+                <li v-for="category in props.post.categories" :key="category.id" class="text-sky-300">
+                    {{ category.name}}
+                </li>
+            </ul>
             <p class="text-neutral-400 text-xs"><time datetime="{{ props.post.created_at }}">{{ props.post.created_at }}</time></p>
-            <div v-html="props.post.body" class="article-content my-10"></div>
+            <div v-html="props.post.body" class="article-content my-10 text-md md:text-base"></div>
         </div>
     </MainLayout>
 </template>

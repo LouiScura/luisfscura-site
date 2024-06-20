@@ -1,9 +1,8 @@
 <script setup>
 
 import {Link} from "@inertiajs/vue3";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import MobileMenu from "@/Components/Header/MobileMenu.vue";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 const mobileMenu = ref(false);
 

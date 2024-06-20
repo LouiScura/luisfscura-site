@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 
         $categories = Category::factory(3)->create();
 
-        Post::factory(6)->create()->each(function ($post) use ($categories){
+        Post::factory(3)->create()->each(function ($post) use ($categories){
             $randomCategories = $categories->random(rand(1, 3));
             $post->categories()->attach($randomCategories);
         });

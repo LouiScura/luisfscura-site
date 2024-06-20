@@ -18,6 +18,7 @@ class ProjectFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(),
+            'description' => $this->faker->paragraph(5),
             'link' => $this->faker->url
         ];
     }
