@@ -3,8 +3,6 @@ import { Head, Link } from '@inertiajs/vue3';
 import MainLayout from "@/Layouts/MainLayout.vue";
 import PrimaryLink from "@/Components/PrimaryLink.vue";
 import ProjectTiles from "@/Components/ProjectTiles.vue";
-import PostTiles from "@/Components/HomePostTiles.vue";
-import {onMounted} from "vue";
 import TechTools from "@/Components/TechTools.vue";
 import HomePostTiles from "@/Components/HomePostTiles.vue";
 
@@ -15,7 +13,10 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head title="Laravel & WordPress Developer | Vue.js and Tailwind CSS Expertise" />
+    <Head>
+        <title>Laravel & WordPress Developer | Vue.js and Tailwind CSS Expertise</title>
+        <meta name="description" content="I am a full-stack developer specializing in WordPress, Laravel, Tailwind CSS, and Vue.js. I help companies succeed by building and enhancing modern, responsive web applications.">
+    </Head>
     <MainLayout classes="text-neutral-100 py-8 md:py-10 relative">
         <div class="max-w-5xl mx-auto w-full px-6 mb-8 md:mb-10">
             <section class="md:flex items-center">

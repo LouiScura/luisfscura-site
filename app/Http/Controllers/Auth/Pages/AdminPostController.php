@@ -50,6 +50,14 @@ class AdminPostController extends Controller
             ->with('success', 'Post created successfully.');
     }
 
+    public function update(Post $post, StorePostRequest $request)
+    {
+        $post->update($request->validated());
+
+        return redirect('/admin/posts')
+            ->with('success', 'Post updated successfully.');
+    }
+
     public function edit(Post $post)
     {
         return Inertia::render('Posts/Edit', [

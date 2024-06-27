@@ -20,7 +20,7 @@ const props = defineProps({
         <nav v-show="mobileMenu" class="bg-custom-black flex flex-col justify-center text-sm text-custom-grey font-light">
             <Link href="/" class="border-b border-custom-border px-6 py-3" :class="{ 'text-custom-orange': $page.url === '/' }">Home</Link>
             <Link href="/blog" preserve-scroll class="border-b border-custom-border px-6 py-3" :class="{ 'text-custom-orange': $page.url.startsWith('/blog') }">Blog</Link>
-            <Link href="/contact" class="border-b border-custom-border px-6 py-3" :class="{ 'text-custom-orange': $page.url === '/now' }">Contact</Link>
+            <a href="mailto:luisfscura@gmail.com" class="border-b border-custom-border px-6 py-3" target="_blank">Contact</a>
             <Link href="/now" preserve-scroll class="px-6 py-3">Now</Link>
         </nav>
     </Transition>

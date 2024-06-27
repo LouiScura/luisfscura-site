@@ -7,6 +7,7 @@ use App\Http\Resources\ProjectHomeResource;
 use App\Models\Post;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,10 @@ class HomeController extends Controller
         ->take(5)
         ->latest()
         ->get();
+
+        foreach ($posts as $post) {
+            $post->image = $post->image ? Storage::url($post->image) : '/images/placeholder2.png';
+        }
 
         $projects = Project::with('tags')
             ->latest()

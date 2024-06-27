@@ -14,7 +14,10 @@ console.log(props.post)
 
 <template>
 
-    <Head :title="props.post.title" />
+    <Head>
+        <title>{{ props.post.title }}</title>
+        <meta name="description" :content="props.post.excerpt">
+    </Head>
 
     <MainLayout>
         <div class="max-w-5xl mx-auto w-full px-6 md:px-8 mt-10">
@@ -40,5 +43,8 @@ console.log(props.post)
     }
     .article-content pre {
         @apply bg-custom-black p-3 relative rounded overflow-x-scroll
+    }
+    .article-content a {
+        @apply text-custom-orange
     }
 </style>

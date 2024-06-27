@@ -151,7 +151,7 @@ const update = () => {
                         </div>
 
                         <div :disabled="form.processing" class="flex items-center mb-10">
-                            <button type="submit" class="bg-custom-orange text-white rounded py-2 px-4 w-52">Create</button>
+                            <button type="submit" class="bg-custom-orange text-white rounded py-2 px-4 w-52">Update</button>
                             <div v-if="form.processing" class="btn-spinner ml-2 text-custom-orange">
                                 Creating...
                             </div>

@@ -5,6 +5,10 @@ import {Head} from "@inertiajs/vue3";
 
 <template>
     <Head title="Now" />
+    <Head>
+        <title>Now</title>
+        <meta name="description" content="I share what I’m currently focused on and working towards.">
+    </Head>
     <MainLayout classes="justify-center">
         <div class="max-w-5xl mx-auto w-full md:px-8 px-6 sm:px-8">
             <!-- Component title/description? for every page-->

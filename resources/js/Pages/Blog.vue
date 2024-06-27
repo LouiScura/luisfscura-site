@@ -19,7 +19,10 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head title="Blog and Articles"/>
+    <Head>
+        <title>Blog and Articles</title>
+        <meta name="description" content="Explore articles on WordPress, Laravel, Vue.js, Tailwind CSS, and more to stay updated with the latest trends and technologies in the industry.">
+    </Head>
     <MainLayout>
         <section class="max-w-5xl mx-auto w-full md:px-8 py-8 md:py-10 px-6 sm:px-8">
             <div v-if="props.posts.data.length > 0">
