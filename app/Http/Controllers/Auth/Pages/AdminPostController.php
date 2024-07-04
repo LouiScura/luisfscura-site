@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Auth\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\AdminPostResource;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Session\Store;
-use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class AdminPostController extends Controller
@@ -50,9 +49,21 @@ class AdminPostController extends Controller
             ->with('success', 'Post created successfully.');
     }
 
-    public function update(Post $post, StorePostRequest $request)
+    public function update(Request $request, Post $post)
     {
-        $post->update($request->validated());
+        $data = $request->only(['title', 'categories', 'body', 'slug', 'excerpt', 'image']);
+
+        if ($request->hasFile('image')) {
+            $filePath = $request->file('image')->store('uploads', 'public');
+            $data['image'] = $filePath;
+
+            // Delete the old image
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
+        }
+
+        $post->update($data);
 
         return redirect('/admin/posts')
             ->with('success', 'Post updated successfully.');
@@ -61,7 +72,7 @@ class AdminPostController extends Controller
     public function edit(Post $post)
     {
         return Inertia::render('Posts/Edit', [
-            'post' => $post->only('id', 'title', 'slug', 'categories', 'body', 'excerpt'),
+            'post' => $post->only('id', 'title', 'slug', 'categories', 'body', 'excerpt', 'image'),
             'categories' => CategoryResource::collection(Category::all())
         ]);
     }

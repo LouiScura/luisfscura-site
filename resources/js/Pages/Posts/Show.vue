@@ -47,4 +47,13 @@ console.log(props.post)
     .article-content a {
         @apply text-custom-orange
     }
+    .article-content ul {
+        @apply list-disc list-inside
+    }
+    .article-content ol {
+        @apply list-decimal list-inside
+    }
+    .article-content ul li::marker {
+        @apply text-custom-orange
+    }
 </style>
