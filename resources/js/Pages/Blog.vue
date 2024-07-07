@@ -34,7 +34,7 @@ const props = defineProps({
                 </div>
 
                 <div>
-                    <ul class="flex overflow-x-auto my-6 gap-4">
+                    <ul class="flex overflow-x-auto my-6 gap-4 whitespace-nowrap">
                         <li><Categories
                             :href="route('blog.index')"
                             :filled="! props.selectedCategory">

@@ -26,7 +26,7 @@ class StorePostRequest extends FormRequest
             'categories' => ['required', 'array'],
             'body' => ['required'],
             'slug' => ['required', 'unique:posts', 'max:75'],
-            'excerpt' => ['required', 'max:255'],
+            'excerpt' => ['required', 'max:20'],
             'image' => ['nullable', 'image'],
         ];
     }

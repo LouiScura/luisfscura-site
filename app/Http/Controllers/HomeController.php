@@ -26,6 +26,10 @@ class HomeController extends Controller
             ->latest()
             ->get();
 
+        foreach ($projects as $project) {
+            $project->image = $project->image ? Storage::url($project->image) : '/images/placeholder2.png';
+        }
+
         return inertia('Home', [
             'posts' => PostHomeResource::collection($posts),
             'projects' => ProjectHomeResource::collection($projects),
